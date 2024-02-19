@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:comapp/utils/utils.dart';
 import 'package:comapp/presenter/presenter.dart';
-import 'package:gauge_indicator/gauge_indicator.dart';
-
+// import 'package:gauge_indicator/gauge_indicator.dart';
+import 'package:gauges/gauges.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 class COMView extends StatefulWidget{
   const COMView({super.key});
 
@@ -115,11 +116,37 @@ class _COMViewState extends State<COMView> {
             fontWeight: FontWeight.bold
        )),
       ],
+      ),
+      SizedBox(height: 18,),
+      Row(
+        children: [
+          SfRadialGauge(
+          axes: <RadialAxis>[
+            RadialAxis(
+              minimum: 0,
+              maximum: 100,
+              ranges: <GaugeRange>[
+                // The first range from 0 to 40 with green color
+                GaugeRange(
+                  startValue: 0,
+                  endValue: 40,
+                  color: Colors.green,
+                ),
+                // The second range from 40 to 100 with red color
+                GaugeRange(
+                  startValue: 40,
+                  endValue: 100,
+                  color: Colors.red,
+                ),
+              ],
+            ),
+    ]
+    ,
       )
       ],
-        )
-      ,),
-      )
+        ),
+      ],
+        )))
   );
 } 
 }
