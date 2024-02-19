@@ -62,6 +62,13 @@ class _COMViewState extends State<COMView> {
               ),
               onPressed: () {},
             ),
+              SizedBox(width: 16,),
+              ElevatedButton(
+              child: const Text(
+                'Disconnect',
+              ),
+              onPressed: () {},
+            ),
 
            ]),
       const SizedBox(height: 10,),
@@ -83,12 +90,7 @@ class _COMViewState extends State<COMView> {
               },
               ),
                const SizedBox(width: 16,),
-             ElevatedButton(
-              child: const Text(
-                'Disconnect',
-              ),
-              onPressed: () {},
-            ),
+           
         ],
 
       ),
@@ -121,6 +123,12 @@ class _COMViewState extends State<COMView> {
       Row(
         children: [
           SfRadialGauge(
+           title: GaugeTitle(
+            text: 'RPM',
+            textStyle: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
           axes: <RadialAxis>[
             RadialAxis(
               minimum: 0,
