@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:comapp/utils/utils.dart';
 import 'package:comapp/presenter/presenter.dart';
-import 'package:gauges/gauges.dart';
+// import 'package:gauges/gauges.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:libserialport/libserialport.dart';
 class COMView extends StatefulWidget{
   const COMView({super.key});
 
@@ -18,9 +19,21 @@ class COMView extends StatefulWidget{
 
 class _COMViewState extends State<COMView> {
   final COMPresenter _comPresenter = COMPresenter();
+  // TextEditingController _editTextController = TextEditingController();
+  // ScrollController _scrollController = ScrollController();
   List<int> baudrate = [9600, 19200, 38400, 57600, 115200];
+  var availablePorts = [];
   //List<String> availablePorts = SerialPort.availablePorts.toList();
  final List<String>_sp = ["y","h"];
+
+  void serialPortsInit(){
+       availablePorts = SerialPort.availablePorts;
+  }
+  @override
+  void initState() {
+    super.initState();
+    serialPortsInit();
+}
  @override
   Widget build(BuildContext context){
   return Scaffold(//Container(child:
@@ -61,13 +74,8 @@ class _COMViewState extends State<COMView> {
               ),
               onPressed: () {},
             ),
-              SizedBox(width: 16,),
-              ElevatedButton(
-              child: const Text(
-                'Disconnect',
-              ),
-              onPressed: () {},
-            ),
+              //const SizedBox(width: 5,),
+              
 
            ]),
       const SizedBox(height: 10,),
@@ -90,8 +98,15 @@ class _COMViewState extends State<COMView> {
               });
               },
               ),
-            const SizedBox(width: 120,),
-            Text("OFF"
+            const SizedBox(width: 10,),
+            ElevatedButton(
+              child: const Text(
+                'Disconnect',
+              ),
+              onPressed: () {},
+            ),
+            const SizedBox(width: 10,),
+            const Text("OFF"
             ,style: TextStyle(
             fontSize:18,
             fontWeight: FontWeight.bold
@@ -108,33 +123,35 @@ class _COMViewState extends State<COMView> {
                 fontWeight: FontWeight.bold
        )),
         SizedBox(width: 10,),
-         Flexible( 
+         Flexible(
       child:TextField(
           decoration: InputDecoration(
-          hintText: 'Enter message',
+          hintText: 'Enter message to send',
           border: OutlineInputBorder(),
         
         )),
+         
       ),
-      const SizedBox(width: 16,),
+      SizedBox(width: 16,),
       
       ],
       ),
-      SizedBox(height: 18,),
+      const SizedBox(height: 18,),
       Row(
-        children: [Container(
-               height: 200, 
+        children: [const SizedBox(height: 10,), 
+        SizedBox( 
+            height: 200, 
             child: Center(
           child: Row(
             children: [
           SfRadialGauge(
-           title: GaugeTitle(
+           title: const GaugeTitle(
             text: 'RPM',
-            textStyle: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            // textStyle: TextStyle(
+            //   color: Theme.of(context).colorScheme.primary,
+            // ),
           ),
-          axes: <RadialAxis>[
+          axes: <RadialAxis>[ 
             RadialAxis(
               minimum: 0,
               maximum: 100,
@@ -143,28 +160,42 @@ class _COMViewState extends State<COMView> {
                 GaugeRange(
                   startValue: 0,
                   endValue: 40,
-                  color: Colors.green,
+                  //color: Colors.green,
                 ),
                 // The second range from 40 to 100 with red color
                 GaugeRange(
                   startValue: 40,
                   endValue: 100,
-                  color: Colors.red,
+                  
+                  //color: Colors.red,
                 ),
               ],
+               pointers: const <GaugePointer>[
+                NeedlePointer(
+                  value: 10,//_pointerValue,
+                  enableAnimation: true,
+                ),]
             ),
     ]
     ,
       ),
-      const SizedBox(width: 50,),
-      SfRadialGauge(
-           title: GaugeTitle(
+      ],
+          ),  
+                ),)
+      ],
+        ),
+        Container(
+          height: 200,child: Center(
+          child: Row(children: [
+          const SizedBox(height: 10,),
+          SfRadialGauge(
+           title: const GaugeTitle(
             text: 'Oil Pressure',
-            textStyle: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            // textStyle: TextStyle(
+            //   color: Theme.of(context).colorScheme.primary,
+            // ),
           ),
-          axes: <RadialAxis>[
+          axes: <RadialAxis>[ 
             RadialAxis(
               minimum: 0,
               maximum: 100,
@@ -173,24 +204,31 @@ class _COMViewState extends State<COMView> {
                 GaugeRange(
                   startValue: 0,
                   endValue: 40,
-                  color: Colors.green,
+                  //color: Colors.green,
                 ),
                 // The second range from 40 to 100 with red color
                 GaugeRange(
                   startValue: 40,
                   endValue: 100,
-                  color: Colors.red,
+                  
+                  //color: Colors.red,
                 ),
               ],
+               pointers: const <GaugePointer>[
+                NeedlePointer(
+                  value: 10,//_pointerValue,
+                  enableAnimation: true,
+                ),]
             ),
-    ]
-    ,
-      )],
-          ),        ),)
-      ],
+    ],
+      ),
+        ],
         ),
+        ),)
+
       ],
-        ))
+        )
+        )
         //)
   );
 } 

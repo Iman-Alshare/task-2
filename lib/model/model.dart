@@ -1,15 +1,22 @@
-
-
-
 class COMModel{
   late String _portName;
   late bool _connectStatus;
   late int _baudRate;
   late String _sentMessage;
   late String _receivedMessage;
-  // late double RPM;
-  // late double oilPressure;
+  late double _rpm;
+  late double _oilPressure;
  
+  double get rpm => _rpm;
+  set rpm(double inRPM){
+      _rpm = inRPM;
+    }
+
+  double get oilPressure => _oilPressure;
+  set oilPressure(double inOilPressure){
+      _oilPressure = inOilPressure;
+    }
+
   int get baudRate => _baudRate;
   set baudRate(int inBaudRate){
       _baudRate = inBaudRate;
@@ -34,5 +41,4 @@ class COMModel{
     set connectStatus(bool inStatus){
       _connectStatus == inStatus;
     }
-    COMModel();
 }

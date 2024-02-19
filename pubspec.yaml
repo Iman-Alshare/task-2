@@ -12,10 +12,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_libserialport: ^0.3.0
+  #serial_port_win32: ^1.3.0
+  #flutter_libserialport: ^0.3.0
+  # ffi: ^2.1.2
+  sqflite_common_ffi: ^2.3.2+1
+  dylib: ^0.3.3
   syncfusion_flutter_gauges: ^24.2.5
   another_flutter_splash_screen: ^1.2.0
   cupertino_icons: ^1.0.2
+  libserialport: ^0.3.0+1
   provider: ^6.1.1
   gauges: ^1.0.0
   animated_splash_screen: ^1.3.0
