@@ -18,7 +18,7 @@ class COMView extends StatefulWidget{
 
 class _COMViewState extends State<COMView> {
   final COMPresenter _comPresenter = COMPresenter();
-  var baudrate = [9600, 19200, 38400, 57600, 115200];
+  List<int> baudrate = [9600, 19200, 38400, 57600, 115200];
   //List<String> availablePorts = SerialPort.availablePorts.toList();
  final List<String>_sp = ["y","h"];
  @override
@@ -54,7 +54,7 @@ class _COMViewState extends State<COMView> {
               });
               },
               ),
-              const SizedBox(width: 16,),
+              const SizedBox(width: 90,),
              ElevatedButton(
               child: const Text(
                 'Connect',
@@ -81,16 +81,21 @@ class _COMViewState extends State<COMView> {
        )),
        const SizedBox(width: 16,),
 
-              DropdownButton(
-              items: _sp.map((e) => DropdownMenuItem (value: e,child: Text(e), ))
+              DropdownButton<int>(
+              items: baudrate.map((int value) => DropdownMenuItem (value: value,
+      child: Text(value.toString()),))
               .toList(),
               onChanged: (val){
               setState((){
               });
               },
               ),
-               const SizedBox(width: 16,),
-           
+            const SizedBox(width: 120,),
+            Text("OFF"
+            ,style: TextStyle(
+            fontSize:18,
+            fontWeight: FontWeight.bold
+       )),
         ],
 
       ),
@@ -105,18 +110,14 @@ class _COMViewState extends State<COMView> {
         SizedBox(width: 10,),
          Flexible( 
       child:TextField(
-        decoration: InputDecoration(
+          decoration: InputDecoration(
           hintText: 'Enter message',
           border: OutlineInputBorder(),
         
         )),
       ),
       const SizedBox(width: 16,),
-      Text("OFF"
-            ,style: TextStyle(
-            fontSize:18,
-            fontWeight: FontWeight.bold
-       )),
+      
       ],
       ),
       SizedBox(height: 18,),
