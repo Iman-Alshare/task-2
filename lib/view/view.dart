@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:comapp/utils/utils.dart';
 import 'package:comapp/presenter/presenter.dart';
-// import 'package:gauge_indicator/gauge_indicator.dart';
 import 'package:gauges/gauges.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 class COMView extends StatefulWidget{
@@ -31,7 +30,7 @@ class _COMViewState extends State<COMView> {
       actions: const [ChangeThemeButtonWidget()
       ],
       ),
-      body:  Container(child: Center(
+      body:  Center( //Container(child: 
         child: Column(
           children: [
             const SizedBox(height: 10,),
@@ -51,7 +50,7 @@ class _COMViewState extends State<COMView> {
               .toList(),
               onChanged: (val){
               setState((){
-              
+
               });
               },
               ),
@@ -81,7 +80,8 @@ class _COMViewState extends State<COMView> {
                 fontWeight: FontWeight.bold
        )),
        const SizedBox(width: 16,),
-       DropdownButton(
+
+              DropdownButton(
               items: _sp.map((e) => DropdownMenuItem (value: e,child: Text(e), ))
               .toList(),
               onChanged: (val){
@@ -104,13 +104,13 @@ class _COMViewState extends State<COMView> {
        )),
         SizedBox(width: 10,),
          Flexible( 
-      child: TextField(
+      child:TextField(
         decoration: InputDecoration(
           hintText: 'Enter message',
           border: OutlineInputBorder(),
         
-        ),
-      )),
+        )),
+      ),
       const SizedBox(width: 16,),
       Text("OFF"
             ,style: TextStyle(
@@ -121,7 +121,11 @@ class _COMViewState extends State<COMView> {
       ),
       SizedBox(height: 18,),
       Row(
-        children: [
+        children: [Container(
+               height: 200, 
+            child: Center(
+          child: Row(
+            children: [
           SfRadialGauge(
            title: GaugeTitle(
             text: 'RPM',
@@ -150,11 +154,43 @@ class _COMViewState extends State<COMView> {
             ),
     ]
     ,
-      )
+      ),
+      const SizedBox(width: 50,),
+      SfRadialGauge(
+           title: GaugeTitle(
+            text: 'Oil Pressure',
+            textStyle: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          axes: <RadialAxis>[
+            RadialAxis(
+              minimum: 0,
+              maximum: 100,
+              ranges: <GaugeRange>[
+                // The first range from 0 to 40 with green color
+                GaugeRange(
+                  startValue: 0,
+                  endValue: 40,
+                  color: Colors.green,
+                ),
+                // The second range from 40 to 100 with red color
+                GaugeRange(
+                  startValue: 40,
+                  endValue: 100,
+                  color: Colors.red,
+                ),
+              ],
+            ),
+    ]
+    ,
+      )],
+          ),        ),)
       ],
         ),
       ],
-        )))
+        ))
+        //)
   );
 } 
 }

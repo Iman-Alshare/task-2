@@ -1,6 +1,5 @@
 
 
-import 'dart:ffi';
 
 class COMModel{
   late String _portName;
@@ -8,8 +7,8 @@ class COMModel{
   late int _baudRate;
   late String _sentMessage;
   late String _receivedMessage;
-  late Float RPM;
-  late Float oilPressure;
+  // late double RPM;
+  // late double oilPressure;
  
   int get baudRate => _baudRate;
   set baudRate(int inBaudRate){
