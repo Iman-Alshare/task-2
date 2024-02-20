@@ -3,7 +3,10 @@ import 'package:comapp/utils/utils.dart';
 import 'package:comapp/presenter/presenter.dart';
 // import 'package:gauges/gauges.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
-import 'package:libserialport/libserialport.dart';
+ import 'package:libserialport/libserialport.dart';
+// import 'package:flutter_libserialport/flutter_libserialport.dart';
+import 'package:provider/provider.dart';
+
 class COMView extends StatefulWidget{
   const COMView({super.key});
 
@@ -22,12 +25,14 @@ class _COMViewState extends State<COMView> {
   // TextEditingController _editTextController = TextEditingController();
   // ScrollController _scrollController = ScrollController();
   List<int> baudrate = [9600, 19200, 38400, 57600, 115200];
-  var availablePorts = [];
+  final List<String> _ports = [];
   //List<String> availablePorts = SerialPort.availablePorts.toList();
- final List<String>_sp = ["y","h"];
-
-  void serialPortsInit(){
-       availablePorts = SerialPort.availablePorts;
+  
+ final List<String>_sp = [SerialPort.availablePorts[0].toString(), "y","h"];
+//SerialPort.availablePorts.length.toString()];
+  final presenterProvider = Provider.of<COMPresenter>;
+  void serialPortsInit (){
+      //_ports = SerialPort.availablePorts; //SerialPort.availablePorts;
   }
   @override
   void initState() {
@@ -184,7 +189,7 @@ class _COMViewState extends State<COMView> {
                 ),)
       ],
         ),
-        Container(
+        SizedBox(
           height: 200,child: Center(
           child: Row(children: [
           const SizedBox(height: 10,),
